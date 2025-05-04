@@ -1,0 +1,19 @@
+<div class="tree-node">
+  <div class="node-content">
+    <transaction-item
+      [transaction]="node.transaction"
+      [fantasyTeams]="getFantasyTeams(node.transaction)">
+    </transaction-item>
+  </div>
+
+  <div class="child-nodes" *ngIf="node.children?.length">
+    <div class="child-line"></div> 
+
+    <div class="children">
+      <transactiontree
+        *ngFor="let child of node.children"
+        [node]="child">
+      </transactiontree>
+    </div>
+  </div>
+</div>

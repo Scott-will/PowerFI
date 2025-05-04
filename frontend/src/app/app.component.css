@@ -1,0 +1,25 @@
+nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline-block; 
+    margin-right: 20px; 
+  }
+  
+  nav ul li a {
+    text-decoration: none; 
+    color: blue; 
+    font-size: 16px; 
+  }
+  
+  nav ul li a.active {
+    font-weight: bold;
+    color: red; 
+  }
+  
+  nav ul li a:hover {
+    text-decoration: underline;
+  }
+  

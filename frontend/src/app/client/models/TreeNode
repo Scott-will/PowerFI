@@ -1,0 +1,5 @@
+export interface TreeNode {
+  transaction: Transaction;
+  children: string[];
+  parent: string;
+}

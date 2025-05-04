@@ -1,0 +1,16 @@
+<div class="search-filters">
+  <input type="text" placeholder="Search by player name" [(ngModel)]="playerName" />
+  <transaction-type-selector (transactionTypeChange)="onTransactionTypeChanged($event)"/>
+  <button (click)="onSearchSubmit()">Search</button>
+
+</div>
+<div class="transaction-list">
+    @for (transaction of (transactions); track transaction.id) {
+        <transaction-item [transaction]="transaction" [fantasyTeams]="getFantasyTeams(transaction)" (itemClicked)="onItemClicked($event)"></transaction-item>         
+    }
+    <mat-paginator [length]="totalItems"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[10, 25, 50, 100]"
+      (page)="onPageChange($event)">
+    </mat-paginator>
+  </div>

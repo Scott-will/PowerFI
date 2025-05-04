@@ -1,0 +1,14 @@
+<main class="main">
+  <div class="content">
+      <h1>Welcome to {{ title }}</h1>
+      <nav>
+        <ul>
+          <li><a routerLink="/playerList" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" aria-current="page">Players</a></li>         
+          <li><a routerLink="/player-transaction-stats" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" aria-current="page">Player Transaction Stats</a></li>        
+          <li><a routerLink="/transaction-page" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" aria-current="page">Transactions</a></li>         
+          <li><a routerLink="/team-transaction-stats" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" aria-current="page">Teams</a></li>  
+        </ul>
+      </nav>
+    <router-outlet/>
+    </div>
+  </main>

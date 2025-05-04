@@ -1,0 +1,3 @@
+<select [(ngModel)]="transactionType" (ngModelChange)="onTransactionTypeChange()">
+    <option *ngFor="let type of transactionTypes" [value]="type">{{ type }}</option>
+</select>

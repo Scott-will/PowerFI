@@ -1,0 +1,9 @@
+  .team-list { 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    overflow-x: auto; 
+    overflow-y: hidden; 
+    white-space: nowrap; 
+  }
+  

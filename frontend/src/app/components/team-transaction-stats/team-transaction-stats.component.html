@@ -1,0 +1,44 @@
+<h2>Employee Table</h2>
+<table>
+  <thead>
+    <tr>
+      <th (click)="sortBy('team')">
+        Team
+      </th>
+      <th (click)="sortBy('total')">
+        Total
+        <span *ngIf="sortColumn === 'total'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+      <th (click)="sortBy('trades')">
+        Trade
+        <span *ngIf="sortColumn === 'trades'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+      <th (click)="sortBy('add')">
+        Add
+        <span *ngIf="sortColumn === 'add'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+      <th (click)="sortBy('drop')">
+        Drop
+        <span *ngIf="sortColumn === 'drop'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <tr *ngFor="let team of teams">
+      <td>{{getTeamName(team.team_key)}}</td>
+      <td>{{ team.total }}</td>
+      <td>{{ team.trades }}</td>
+      <td>{{ team.add }}</td>
+      <td>{{ team.drop }}</td>
+    </tr>
+  </tbody>
+</table>

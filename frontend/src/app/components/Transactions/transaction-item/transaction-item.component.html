@@ -1,0 +1,58 @@
+<div class="object-container" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()" (click)="onClick()">
+  <div class="property">
+    <div class="prop">
+      @if(transaction){
+      <div class="tradee-trader-container">
+        
+        <!-- Trader side -->
+        <div class="trader">
+          <div>
+            <p>{{ getFantasyTeamTrader().name }}</p>
+            @if(getFantasyTeamTrader().picture_url){
+              <img [src]="getFantasyTeamTrader().picture_url" alt="Player" />
+            }
+          </div>
+
+          <!-- Added players under trader -->
+          @if(showLists){
+          <div class="list">
+            <ul>
+              @for (item of (transaction.added_players.split(",")); track item) {
+                <li>{{ getPlayerName(item) }}</li>
+              }
+            </ul>
+          </div>
+          }
+        </div>
+
+        <!-- Arrows in middle -->
+        <div class="arrows">
+          <span class="arrow-left">&#8594;</span>
+          <span class="arrow-right">&#8592;</span>
+        </div>
+
+        <!-- Tradee side -->
+        <div class="tradee">
+          <div>
+            <p>{{ getFantasyTeamTradee().name }}</p>
+            @if(getFantasyTeamTradee().picture_url){
+              <img [src]="getFantasyTeamTradee().picture_url" alt="Player" />
+            }
+          </div>
+
+          <!-- Removed players under tradee -->
+          @if(showLists){
+          <div class="list">
+            <ul>
+              @for (item of (transaction.removed_players.split(",")); track item) {
+                <li>{{ getPlayerName(item) }}</li>
+              }
+            </ul>
+          </div>
+          }
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

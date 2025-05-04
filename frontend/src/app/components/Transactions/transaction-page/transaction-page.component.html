@@ -1,0 +1,7 @@
+<ng-container *ngIf="!showTree">
+    <transaction-list (selectedTransaction)="onTransactionSelected($event)"></transaction-list>
+  </ng-container>
+  
+  <ng-container *ngIf="showTree">
+    <transactiontree [node]="this.node"></transactiontree>
+  </ng-container>

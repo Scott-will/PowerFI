@@ -1,0 +1,47 @@
+.tree-node {
+    text-align: center;
+    position: relative;
+    padding: 20px 0;
+  }
+  
+  .node-content {
+    display: inline-block;
+    position: relative;
+    padding: 10px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .child-nodes {
+    position: relative;
+    padding-top: 20px;
+  }
+  
+  .child-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    height: 20px;
+    width: 2px;
+    background: #000;
+    transform: translateX(-50%);
+  }
+  
+  .children {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* space between children */
+    position: relative;
+  }
+  
+  .children::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #000;
+  }
+  

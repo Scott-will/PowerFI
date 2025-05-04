@@ -1,0 +1,35 @@
+.team-item {
+    width: 200px;
+    height: 300px;
+    margin: 10px;
+    padding: 15px;
+    background-color: #7a7575;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: center;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    border: 1px solid #060606;
+  }
+  
+  .team-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .team-item:hover .player-details {
+    display: block; 
+  }
+  
+  .team-item h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #bbdf19;
+    margin-bottom: 15px;
+  }
+  
+  .team-item p {
+    font-size: 14px;
+    color: #bbdf19;
+    margin: 0;
+  }

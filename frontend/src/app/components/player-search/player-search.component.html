@@ -1,0 +1,29 @@
+<div class="search-container">
+    <form (submit)="onSubmit()" class="search-form">
+      <div class="search-bar-container">
+        <input
+          type="text"
+          [value]="this.queryValue"
+          (input)="this.onInputChange($event)"
+          placeholder="Search players..."
+          class="search-bar"
+        />
+      </div>
+  
+      <div class="dropdown-container">
+        <label for="search-property">Search by:</label>
+        <select id="search-property" (change)="this.onPropertyChange($event)">
+          @for (property of (searchProperties); track property.label){
+            <option value="{{ property.value }}">
+              {{ property.label }}
+            </option>
+          }
+        </select>
+      </div>
+  
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  
+    
+  

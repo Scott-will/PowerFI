@@ -1,0 +1,55 @@
+<h2>Player Transaction Stats</h2>
+
+<div class="page-size">
+  <label for="pageSize">Items per page:</label>
+  <select id="pageSize" [(ngModel)]="pageSize" (change)="goToPage(1)">
+    <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+  </select>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th (click)="sortBy('total')">
+        Total
+        <span *ngIf="sortColumn === 'total'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+      <th (click)="sortBy('trades')">
+        Trade
+        <span *ngIf="sortColumn === 'trades'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+      <th (click)="sortBy('add')">
+        Add
+        <span *ngIf="sortColumn === 'add'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+      <th (click)="sortBy('drop')">
+        Drop
+        <span *ngIf="sortColumn === 'drop'">
+          {{ sortDirection === true ? '▲' : '▼' }}
+        </span>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let player of players">
+      <td>{{getPlayerName(player.player_key)}}</td>
+      <td>{{ player.total }}</td>
+      <td>{{ player.trades }}</td>
+      <td>{{ player.add }}</td>
+      <td>{{ player.drop }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <button (click)="prevPage()" [disabled]="pageIndex === 1">Prev</button>
+  <span>Page {{ pageIndex }} of {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="pageIndex === totalPages">Next</button>
+</div>
