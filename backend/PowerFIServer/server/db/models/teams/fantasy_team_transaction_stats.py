@@ -1,7 +1,7 @@
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import mapped_column, Mapped
 
-from server.db.db import Base
+from PowerFIServer.server.db.db import Base
 
 
 class FantasyTeamTransactionStats(Base):

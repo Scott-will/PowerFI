@@ -2,8 +2,8 @@ from sqlalchemy import select, func, or_
 import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server.db.models.transactions.player_stats_transactions import PlayerStatsByTransaction
-from server.db.models.transactions.transaction import Transaction
+from PowerFIServer.server.db.models.transactions.player_stats_transactions import PlayerStatsByTransaction
+from PowerFIServer.server.db.models.transactions.transaction import Transaction
 
 logger = logging.getLogger(__name__)
 

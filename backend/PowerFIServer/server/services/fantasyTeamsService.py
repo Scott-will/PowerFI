@@ -2,11 +2,11 @@ import logging
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server.db.Dao.fantasy_team_dao import get_fantasy_teams, get_team_image, get_team_transaction_stats, \
+from PowerFIServer.server.db.Dao.fantasy_team_dao import get_fantasy_teams, get_team_image, get_team_transaction_stats, \
     get_all_team_transaction_stats
-from server.db.models.teams.fantasy_team import FantasyTeam
-from server.db.models.teams.fantasy_team_image import FantasyTeamImage
-from server.db.models.teams.fantasy_team_transaction_stats import FantasyTeamTransactionStats
+from PowerFIServer.server.db.models.teams.fantasy_team import FantasyTeam
+from PowerFIServer.server.db.models.teams.fantasy_team_image import FantasyTeamImage
+from PowerFIServer.server.db.models.teams.fantasy_team_transaction_stats import FantasyTeamTransactionStats
 
 logger = logging.getLogger(__name__)
 

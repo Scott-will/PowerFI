@@ -3,9 +3,9 @@ import logging
 from sqlalchemy import select, asc, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server.db.models.teams.fantasy_team import FantasyTeam
-from server.db.models.teams.fantasy_team_image import FantasyTeamImage
-from server.db.models.teams.fantasy_team_transaction_stats import FantasyTeamTransactionStats
+from PowerFIServer.server.db.models.teams.fantasy_team import FantasyTeam
+from PowerFIServer.server.db.models.teams.fantasy_team_image import FantasyTeamImage
+from PowerFIServer.server.db.models.teams.fantasy_team_transaction_stats import FantasyTeamTransactionStats
 
 logger = logging.getLogger(__name__)
 

@@ -3,8 +3,8 @@ import logging
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server.db.db import get_db
-from server.services.transactionsService import TransactionsService
+from PowerFIServer.server.db.db import get_db
+from PowerFIServer.server.services.transactionsService import TransactionsService
 
 router = APIRouter()
 

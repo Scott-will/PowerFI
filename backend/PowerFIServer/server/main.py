@@ -3,7 +3,7 @@ import logging
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from server.controllers import fantasyController, playersController, transactionsController, fantasyTeamsController
+from PowerFIServer.server.controllers import fantasyController, playersController, transactionsController, fantasyTeamsController
 
 logger = logging.getLogger(__name__)
 

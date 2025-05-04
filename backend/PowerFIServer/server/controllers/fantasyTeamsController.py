@@ -4,8 +4,8 @@ import logging
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.responses import StreamingResponse
-from server.db.db import get_db
-from server.services.fantasyTeamsService import FantasyTeamsService
+from PowerFIServer.server.db.db import get_db
+from PowerFIServer.server.services.fantasyTeamsService import FantasyTeamsService
 
 logger = logging.getLogger(__name__)
 

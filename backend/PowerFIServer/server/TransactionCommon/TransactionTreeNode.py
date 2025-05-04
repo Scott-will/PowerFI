@@ -1,4 +1,4 @@
-from server.db.models.transactions.transaction import Transaction
+from PowerFIServer.server.db.models.transactions.transaction import Transaction
 
 
 class TransactionTreeNode:

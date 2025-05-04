@@ -4,8 +4,8 @@ from http.client import HTTPException
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server.db.db import get_db
-from server.services.fantasyService import FantasyService
+from PowerFIServer.server.db.db import get_db
+from PowerFIServer.server.services.fantasyService import FantasyService
 
 logger = logging.getLogger(__name__)
 

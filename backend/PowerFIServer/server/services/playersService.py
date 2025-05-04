@@ -2,10 +2,10 @@ import logging
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server.db.Dao import players_dao
-from server.db.models.players.player import Player
-from server.db.models.players.player_image import PlayerImage
-from server.db.models.players.player_transaction_stats import PlayerTransactionStats
+from PowerFIServer.server.db.Dao import players_dao
+from PowerFIServer.server.db.models.players.player import Player
+from PowerFIServer.server.db.models.players.player_image import PlayerImage
+from PowerFIServer.server.db.models.players.player_transaction_stats import PlayerTransactionStats
 
 logger = logging.getLogger(__name__)
 

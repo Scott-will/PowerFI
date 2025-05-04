@@ -4,9 +4,9 @@ from sqlalchemy import select, asc, desc
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.sql.functions import func
 
-from server.db.models.players.player import Player
-from server.db.models.players.player_image import PlayerImage
-from server.db.models.players.player_transaction_stats import PlayerTransactionStats
+from PowerFIServer.server.db.models.players.player import Player
+from PowerFIServer.server.db.models.players.player_image import PlayerImage
+from PowerFIServer.server.db.models.players.player_transaction_stats import PlayerTransactionStats
 
 logger = logging.getLogger(__name__)
 

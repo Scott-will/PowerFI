@@ -3,7 +3,7 @@ import logging
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from sqlalchemy.orm import DeclarativeBase
 
-from server.config import SQLALCHEMY_DATABASE_URI
+from PowerFIServer.server.config import SQLALCHEMY_DATABASE_URI
 
 logger = logging.getLogger(__name__)
 

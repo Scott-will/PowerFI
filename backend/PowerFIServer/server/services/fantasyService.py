@@ -2,8 +2,8 @@ import logging
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from server.StatsEngine import stats_engine
-from server.YahooEngine import yahoo_engine
+from PowerFIServer.server.StatsEngine import stats_engine
+from PowerFIServer.server.YahooEngine import yahoo_engine
 
 logger = logging.getLogger(__name__)
 

@@ -2,7 +2,7 @@ from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.dialects.postgresql import BYTEA
 from sqlalchemy.orm import Mapped, mapped_column, foreign, relationship
 
-from server.db.db import Base
+from PowerFIServer.server.db.db import Base
 
 
 class PlayerImage(Base):
