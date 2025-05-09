@@ -68,10 +68,6 @@ async def get_player_by_id(id : int, db : AsyncSession) -> Player:
     results = await db.execute(select(Player).where(Player.id == id))
     return results.scalars().first()
 
-async def get_player_image(id : int, db : AsyncSession) -> PlayerImage:
-    results = await db.execute(select(PlayerImage).where(PlayerImage.id == id))
-    return results.scalars().first()
-
 async def get_player_transaction_stats(player_key : str, db : AsyncSession) -> [PlayerTransactionStats]:
     results = await db.execute(select(PlayerTransactionStats).where(PlayerTransactionStats.player_key == player_key))
     return results.scalars().all()

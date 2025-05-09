@@ -1,0 +1,11 @@
+.adjustable-table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: collapse;
+  }
+  
+  .adjustable-table th, .adjustable-table td {
+    min-width: 100px; 
+    padding: 8px;
+    word-wrap: break-word;
+  }

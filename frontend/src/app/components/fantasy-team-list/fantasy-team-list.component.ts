@@ -12,8 +12,7 @@ import { FantasyTeamComponent } from "../fantasy-team/fantasy-team.component";
 export class FantasyTeamListComponent implements OnInit{
   teams : FantasyTeam[] = [];
   
-  constructor(private readonly fantasyTeamService : FantasyTeamService){}
-  
+  constructor(private readonly fantasyTeamService : FantasyTeamService){} 
 
   ngOnInit(): void {
     this.fetchTransactionData()

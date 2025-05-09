@@ -73,7 +73,7 @@ class YahooEngine:
                 if player_metadata != None:
                     player_image = await self.save_player_image( player_metadata.headshot.url, player[0])
                     db.add(player_image)
-                    await db.flush()  # Flush to generate the ID
+                    await db.flush()
                     stmt = update(Player).where(Player.id == player[0]).values(picture_url=f"http://localhost:80/api/players/get_player_image/{player_image.id}")
                     await db.execute(stmt)
                     await db.commit()

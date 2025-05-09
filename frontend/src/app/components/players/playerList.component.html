@@ -1,17 +1,25 @@
 <div class="player-list">
-  @for (player of (players); track player.id) {
-    <div class="player-item">
-      <h4>{{ player.first_name + " " + player.last_name }}</h4>
-      <p>{{ player.position }}</p>
-      <img src={{player.picture_url}} alt="Player" />
-      <div class="player-details">
-        <p>{{player.team}}</p>
-      </div>  
-    </div>
-  }
+  <div 
+  class="player-item" 
+  *ngFor="let player of players;" 
+  (click)="openModal(player.player_id)">
+  <h4>{{ player.first_name + ' ' + player.last_name }}</h4>
+  <p>{{ player.position }}</p>
+  <img [src]="player.picture_url" alt="Player" />
+  <div class="player-details">
+    <p>{{ player.team }}</p>
+  </div>  
+</div>
+
   <mat-paginator [length]="totalItems"
     [pageSize]="pageSize"
     [pageSizeOptions]="[10, 25, 50, 100]"
     (page)="onPageChange($event)">
   </mat-paginator>
 </div>
+
+<player-transaction-modal
+*ngIf="showModal"
+  [selectedPlayerId]="selectedPlayerId"
+  (close)="closeModal()">
+</player-transaction-modal>

@@ -8,33 +8,39 @@ import { TransactionType } from '../transaction-type-selector/transaction-types'
 import { FormsModule } from '@angular/forms';
 import { TransactionTypeSelectorComponent } from "../transaction-type-selector/transaction-type-selector.component";
 import { FantasyTeamCache } from '../../../cache/fantasy-team-cache';
+import { PaginationHelper } from '../../../helpers/pagination-helper';
+import { CommonModule } from '@angular/common';
+import { PlayerCache } from '../../../cache/player-cache';
 
 @Component({
   selector: 'transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrl: './transaction-list.component.css',
   imports: [
-    MatPaginator,
-    TransactionItemComponent,
     FormsModule,
-    TransactionTypeSelectorComponent
+    TransactionTypeSelectorComponent,
+    CommonModule
 ],
 })
 
 export class TransactionListComponent implements OnInit{
   playerName = "";
+  teamName = "";
   transactionTypes = Object.values(TransactionType);
   transactionType = TransactionType.All;
   
   transactions : Transaction[] = [];
-  totalItems = 0;
-  pageSize = 10;
-  pageIndex = 0;
+  paginationHelper! : PaginationHelper;
+  
   @Output() selectedTransaction = new EventEmitter<Transaction>();
 
   constructor(
     private readonly transactionService : TransactionService,
-    private readonly fantasyTeamCache : FantasyTeamCache){}
+    private readonly fantasyTeamCache : FantasyTeamCache,
+    private readonly playerCache : PlayerCache){
+      this.playerCache = playerCache
+      this.paginationHelper = new PaginationHelper(this.fetchTransactionData.bind(this))
+    }
 
   ngOnInit(): void {
     this.fetchTransactionData()
@@ -42,38 +48,36 @@ export class TransactionListComponent implements OnInit{
 
   onTransactionTypeChanged(newTransactionType: TransactionType) {
     this.transactionType = newTransactionType;
-    console.log("Update transaction type to: ", this.transactionType, newTransactionType)
   }
   
   fetchTransactionData(){
-    console.log(this.transactionType)
-    this.transactionService.getAllTransactions({skip: (this.pageIndex*this.pageSize).toString(), take : this.pageSize.toString(), type : this.transactionType})
+    this.transactionService.getAllTransactions({skip: ((this.paginationHelper.pageIndex-1)*this.paginationHelper.pageSize).toString(), take : this.paginationHelper.pageSize.toString(), type : this.transactionType, player : this.playerName, team : this.teamName})
     .subscribe((response) => {
       this.transactions = response.items
-      this.totalItems = response.total
+      this.paginationHelper.totalItems = response.total
+      console.log("total is: ", response.total)
     })
   }
 
-  getFantasyTeams(transaction: Transaction): FantasyTeam[] {
-    const addedTeam = this.fantasyTeamCache.getTeamByKey(transaction.team_key_added);
-    const removedTeam = this.fantasyTeamCache.getTeamByKey(transaction.team_key_removed);
-    return [addedTeam, removedTeam].filter(team => team !== undefined && team !== null);
+  getFantasyTeam(team_key: string): string {
+      const addedTeam = this.fantasyTeamCache.getTeamByKey(team_key);
+      return addedTeam?.name ?? "";
+  }  
+
+  getPlayerNames(players: string): string {
+    const playerKeys = players.split(',');
+    return playerKeys
+      .map(p => this.playerCache.getPlayerNameById(p))
+      .join(', ');
   }
   
 
-  onPageChange(event: PageEvent): void {
-    this.pageIndex = event.pageIndex;
-    this.pageSize = event.pageSize;
-    this.fetchTransactionData();
-  }
-
   onSearchSubmit(): void {
-    this.pageIndex = 0; // Reset to the first page
+    this.paginationHelper.pageIndex = 1;
     this.fetchTransactionData();
   }
 
   onItemClicked(transaction: Transaction) {
-    console.log("List CLICKED!!")
     this.selectedTransaction.emit(transaction);
   }
 }

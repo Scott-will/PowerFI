@@ -1,16 +1,43 @@
+<h2>League Transactions</h2>
 <div class="search-filters">
   <input type="text" placeholder="Search by player name" [(ngModel)]="playerName" />
+  <input type="text" placeholder="Search by team name" [(ngModel)]="teamName" />
   <transaction-type-selector (transactionTypeChange)="onTransactionTypeChanged($event)"/>
   <button (click)="onSearchSubmit()">Search</button>
 
 </div>
-<div class="transaction-list">
-    @for (transaction of (transactions); track transaction.id) {
-        <transaction-item [transaction]="transaction" [fantasyTeams]="getFantasyTeams(transaction)" (itemClicked)="onItemClicked($event)"></transaction-item>         
-    }
-    <mat-paginator [length]="totalItems"
-      [pageSize]="pageSize"
-      [pageSizeOptions]="[10, 25, 50, 100]"
-      (page)="onPageChange($event)">
-    </mat-paginator>
-  </div>
+<div class="page-size">
+  <label for="pageSize">Items per page:</label>
+  <select id="pageSize" [(ngModel)]="paginationHelper.pageSize" (change)="paginationHelper.goToPage(1)">
+    <option *ngFor="let size of paginationHelper.pageSizeOptions" [value]="size">{{ size }}</option>
+  </select>
+</div>
+
+<table class="adjustable-table">
+  <thead>
+    <tr>
+      <th>Transaction Type</th>
+      <th>Team To</th>
+      <th>Players Removed</th>
+      <th>Team From</th>
+      <th>Players Added</th>
+      <th>Timestamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transaction of transactions">
+      <td>{{ transaction.type }}</td>
+      <td>{{ getFantasyTeam(transaction.team_key_added) }}</td>
+      <td>{{ this.getPlayerNames(transaction.added_players) }}</td>
+      <td>{{ getFantasyTeam(transaction.team_key_removed) }}</td>
+      <td>{{ this.getPlayerNames(transaction.removed_players) }}</td>
+      <td>{{ transaction.timestamp }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="pagination">
+  <button (click)="paginationHelper.prevPage()" [disabled]="paginationHelper.pageIndex === 1">Prev</button>
+  <span>Page {{ paginationHelper.pageIndex }} of {{ paginationHelper.totalPages }}</span>
+  <button (click)="paginationHelper.nextPage()" [disabled]="paginationHelper.pageIndex === paginationHelper.totalPages">Next</button>
+</div>

@@ -1,0 +1,13 @@
+<div class="popup-overlay" (click)="closeModal()">
+    <div class="popup-content" (click)="$event.stopPropagation()">
+      <ul class="transaction-list">
+        <li *ngFor="let t of transactions; let last = last">
+          <img [src]="getTeamImageUrl(t.team_key_added)" alt="Added Team" class="team-image" />
+      
+          <!-- Green arrow (only if not last item) -->
+          <div *ngIf="!last" class="down-arrow">↓</div>
+        </li>
+      </ul>
+      <button (click)="closeModal()">Close</button>
+    </div>
+  </div>

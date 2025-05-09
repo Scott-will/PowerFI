@@ -2,25 +2,41 @@ import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../client/services/players.service';
 import { Player } from '../../client/models/player';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
+import { CommonModule } from '@angular/common';
+import { TransactionResponse } from '../../client/models/transaction';
+import { TransactionService } from '../../client/services/transactions.service';
+import { PlayerCache } from '../../cache/player-cache';
+import { PlayerTransactionModalComponent } from "../player-transaction-modal/player-transaction-modal.component";
 
 @Component({
   selector: 'playerList',
   templateUrl: './playerList.component.html',
   styleUrls: ['./playerList.component.css'],
   imports: [
-    MatPaginator
- ],
+    MatPaginator,
+    CommonModule,
+    PlayerTransactionModalComponent
+],
 })
 export class PlayerListComponent implements OnInit {
   players : Player[] = [];
   totalItems = 0;
   pageSize = 10;
   pageIndex = 0;
+  showModal = false;
+  selectedPlayerId = ""
 
-  constructor(private readonly playerService: PlayerService) {}
+  constructor(private readonly playerService: PlayerService,
+    private readonly transactionService: TransactionService,
+    private readonly playerCache : PlayerCache
+  ) {
+    this.playerService = playerService;
+    this.transactionService = transactionService;
+    this.playerCache = playerCache;
+  }
 
   ngOnInit() {
-    this.fetchPlayerData(); // Fetch the players when the component initializes
+    this.fetchPlayerData();
   }
 
   fetchPlayerData(){
@@ -37,5 +53,15 @@ export class PlayerListComponent implements OnInit {
     this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
     this.fetchPlayerData();
+  }
+
+  openModal(playerId : string){
+    this.showModal = true;
+    this.selectedPlayerId = playerId;
+  }
+
+  closeModal(){
+    this.showModal = false;
+    this.selectedPlayerId = ""
   }
 }

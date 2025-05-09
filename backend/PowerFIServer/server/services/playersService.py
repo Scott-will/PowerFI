@@ -3,6 +3,7 @@ import logging
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from PowerFIServer.server.db.Dao import players_dao
+from PowerFIServer.server.db.Dao.player_image_dao import get_player_image
 from PowerFIServer.server.db.models.players.player import Player
 from PowerFIServer.server.db.models.players.player_image import PlayerImage
 from PowerFIServer.server.db.models.players.player_transaction_stats import PlayerTransactionStats
@@ -32,7 +33,7 @@ class PlayerService:
 
     async def get_player_image(self, id : int, db : AsyncSession) -> PlayerImage | None:
         try:
-            return await players_dao.get_player_image(id, db)
+            return await get_player_image(id, db)
         except Exception as e:
             logger.error("Failed to get players", e)
             return None

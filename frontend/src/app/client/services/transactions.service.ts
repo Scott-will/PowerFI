@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TransactionResponse, TreeNode } from '../models/transaction';
+import { Transaction, TransactionResponse, TreeNode } from '../models/transaction';
 import { ConfigService } from '../../config.services';
 
 
@@ -15,6 +15,7 @@ export class TransactionService {
     private readonly getTransactionUrl = "/api/transactions/get_transactions?"
     private readonly getTradesUrl = "/api/transactions/get_trades?"
     private readonly getTransactionTreeUrl = "/api/transactions/related_transactions"
+    private readonly getPlayerTransactionsUrl = "/api/transactions/player_transactions?"
 
     getAllTransactions(queryParams : {[key : string]:string}): Observable<TransactionResponse> {
         let params = new HttpParams();
@@ -42,5 +43,11 @@ export class TransactionService {
         let params = new HttpParams();
         params = params.set("transaction_id", transactionId)
         return this.http.get<TreeNode>(this.configService.getApiUrl() + this.getTransactionTreeUrl, {params})
+    }
+
+    getPlayerTransactions(playerId : string): Observable<Transaction[]>{
+        let params = new HttpParams();
+        params = params.set("player_id", playerId)
+        return this.http.get<Transaction[]>(this.configService.getApiUrl() + this.getPlayerTransactionsUrl, {params})
     }
 }

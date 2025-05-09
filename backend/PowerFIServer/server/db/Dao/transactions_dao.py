@@ -1,7 +1,8 @@
 from sqlalchemy import select, func, or_
 import logging
 from sqlalchemy.ext.asyncio import AsyncSession
-
+from PowerFIServer.server.db.models.players.player import Player
+from PowerFIServer.server.db.models.teams.fantasy_team import FantasyTeam
 from PowerFIServer.server.db.models.transactions.player_stats_transactions import PlayerStatsByTransaction
 from PowerFIServer.server.db.models.transactions.transaction import Transaction
 
@@ -29,12 +30,59 @@ async def save_transactions(transactions: [Transaction], db : AsyncSession):
     except Exception as e:
         logger.error(f"Error saving transactions: {e}")
 
-async def get_transactions(take : int, skip : int, player : str, type : str, db : AsyncSession) -> [Transaction]:
+async def get_transactions(take : int, skip : int, player : str, team : str, type : str, db : AsyncSession) -> [Transaction]:
+
     total_result = await db.execute(select(func.count(Transaction.id)))
     total = total_result.scalar()
     query = select(Transaction).limit(take).offset(skip)
     if player:
-        query = query.where(Transaction.removed_players.contains(player) or Transaction.added_players.contains(player))
+        player_subquery = (
+            select(Player.player_id)
+            .where(
+                or_(
+                    Player.first_name.ilike(f"%{player}%"),
+                    Player.last_name.ilike(f"%{player}%")
+                )
+            )
+        )
+
+        matching_player_ids = (await db.execute(player_subquery)).scalars().all()
+
+        if matching_player_ids:
+            matching_player_ids = [str(pid) for pid in matching_player_ids]
+
+            player_conditions = [
+                or_(
+                    Transaction.added_players.ilike(f'%{pid}%'),
+                    Transaction.removed_players.ilike(f'%{pid}%'),
+                )
+                for pid in matching_player_ids
+            ]
+            query = query.where(or_(*player_conditions))
+        else:
+            return {
+                "total": 0,
+                "items": []
+            }
+    if team:
+        team_subquery = (
+            select(FantasyTeam.team_key)
+            .where(
+                FantasyTeam.name.ilike(f"%{team}%")
+            )
+        )
+        matching_team_keys = (await db.execute(team_subquery)).scalars().all()
+
+        if matching_team_keys:
+            matching_team_keys = [str(tk) for tk in matching_team_keys]
+            team_conditions = [
+                or_(
+                    Transaction.team_key_added.ilike(f'%{tk}%'),
+                    Transaction.team_key_removed.ilike(f'%{tk}%'),
+                )
+                for tk in matching_team_keys
+            ]
+            query = query.where(or_(*team_conditions))
     if type:
         if type != "all":
             query = query.where(Transaction.type == type)

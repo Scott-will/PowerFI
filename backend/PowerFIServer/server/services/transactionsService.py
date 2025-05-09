@@ -12,13 +12,13 @@ logger = logging.getLogger(__name__)
 
 class TransactionsService:
     #paginated api to get players
-    async def getTransactions(self, take : int, skip : int, player : str, type : str, db : AsyncSession) -> [Transaction]:
+    async def getTransactions(self, take : int, skip : int, player : str, team : str, type : str, db : AsyncSession) -> [Transaction]:
         if type:
             if type not in GetValidTransactionTypes():
                 #throw error
                 return []
         try:
-            return await get_transactions(take, skip, player, type, db)
+            return await get_transactions(take, skip, player, team, type, db)
         except Exception as e:
             logger.error("Failed to get transactions", e)
             return []

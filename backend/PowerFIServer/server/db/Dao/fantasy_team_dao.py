@@ -32,10 +32,6 @@ async def get_fantasy_teams(take : int, skip : int, db : AsyncSession) -> [Fanta
     results = await db.execute(select(FantasyTeam).limit(take).offset(skip))
     return results.scalars().all()
 
-async def get_team_image(id : int, db : AsyncSession) -> FantasyTeamImage:
-    results = await db.execute(select(FantasyTeamImage).where(FantasyTeamImage.id == id))
-    return results.scalars().first()
-
 async def get_team_transaction_stats(team_key : str, db : AsyncSession) -> [FantasyTeamTransactionStats]:
     results = await db.execute(select(FantasyTeamTransactionStats).where(FantasyTeamTransactionStats.team_key == team_key))
     return results.scalars().all()

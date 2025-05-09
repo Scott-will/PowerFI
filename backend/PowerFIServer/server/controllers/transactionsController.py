@@ -11,9 +11,9 @@ router = APIRouter()
 logger = logging.getLogger(__name__)
 
 @router.get("/get_transactions")
-async def get_transactions(take : int, skip : int,  player : str = None, type : str = None, db: AsyncSession = Depends(get_db)):
+async def get_transactions(take : int, skip : int,  player : str = None, team : str = None, type : str = None, db: AsyncSession = Depends(get_db)):
     transactions_service = TransactionsService()
-    return await transactions_service.getTransactions(take, skip, player, type, db)
+    return await transactions_service.getTransactions(take, skip, player, team, type, db)
 
 @router.get("/get_trades")
 async def get_trades(take : int, skip : int, db: AsyncSession = Depends(get_db)):
@@ -26,9 +26,9 @@ async def get_waivers(take : int, skip : int, db: AsyncSession = Depends(get_db)
     return await transactions_service.get_waivers(take, skip, db)
 
 @router.get("/player_transactions")
-async def get_transactions_for_player(player : str, db : AsyncSession = Depends(get_db)):
+async def get_transactions_for_player(player_id : str, db : AsyncSession = Depends(get_db)):
     transactions_service = TransactionsService()
-    return await transactions_service.get_transactions_for_players(player, db)
+    return await transactions_service.get_transactions_for_players(player_id, db)
 
 @router.get("/team_transactions")
 async def get_transactions_for_player(team_key : str, db : AsyncSession = Depends(get_db)):

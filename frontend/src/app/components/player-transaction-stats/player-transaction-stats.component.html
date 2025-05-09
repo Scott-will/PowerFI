@@ -1,9 +1,9 @@
-<h2>Player Transaction Stats</h2>
+<h2>Player Transaction Data</h2>
 
 <div class="page-size">
   <label for="pageSize">Items per page:</label>
-  <select id="pageSize" [(ngModel)]="pageSize" (change)="goToPage(1)">
-    <option *ngFor="let size of pageSizeOptions" [value]="size">{{ size }}</option>
+  <select id="pageSize" [(ngModel)]="paginationHelper.pageSize" (change)="paginationHelper.goToPage(1)">
+    <option *ngFor="let size of paginationHelper.pageSizeOptions" [value]="size">{{ size }}</option>
   </select>
 </div>
 
@@ -49,7 +49,7 @@
 </table>
 
 <div class="pagination">
-  <button (click)="prevPage()" [disabled]="pageIndex === 1">Prev</button>
-  <span>Page {{ pageIndex }} of {{ totalPages }}</span>
-  <button (click)="nextPage()" [disabled]="pageIndex === totalPages">Next</button>
+  <button (click)="paginationHelper.prevPage()" [disabled]="paginationHelper.pageIndex === 1">Prev</button>
+  <span>Page {{ paginationHelper.pageIndex }} of {{ paginationHelper.totalPages }}</span>
+  <button (click)="paginationHelper.nextPage()" [disabled]="paginationHelper.pageIndex === paginationHelper.totalPages">Next</button>
 </div>
