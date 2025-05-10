@@ -1,3 +1,4 @@
+from pydantic.v1 import BaseModel
 from sqlalchemy import Integer, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -23,6 +24,7 @@ class FantasyTeam(Base):
     picture_url : Mapped[str] = mapped_column(String(250))
 
     pictures = relationship("FantasyTeamImage", back_populates="fantasy_team")
+
 
 
 ##sample team from yahoo
