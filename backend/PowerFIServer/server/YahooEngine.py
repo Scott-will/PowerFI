@@ -17,7 +17,6 @@ from PowerFIServer.server.db.models.transactions.player_stats_transactions impor
 from PowerFIServer.server.db.models.transactions.transaction import Transaction, TransactionPlayers
 
 logger = logging.getLogger(__name__)
-
 class YahooEngine:
     def __init__(self):
         self.query : YahooFantasySportsQuery = None
