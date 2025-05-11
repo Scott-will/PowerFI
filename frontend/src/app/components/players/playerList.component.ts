@@ -3,7 +3,6 @@ import { PlayerService } from '../../client/services/players.service';
 import { Player } from '../../client/models/player';
 import {MatPaginator, PageEvent} from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
-import { TransactionResponse } from '../../client/models/transaction';
 import { TransactionService } from '../../client/services/transactions.service';
 import { PlayerCache } from '../../cache/player-cache';
 import { PlayerTransactionModalComponent } from "../player-transaction-modal/player-transaction-modal.component";
