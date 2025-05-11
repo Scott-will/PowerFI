@@ -14,5 +14,8 @@ SQLALCHEMY_DATABASE_URI = (
     f"{os.getenv('POSTGRES_PORT')}/"
     f"{os.getenv('POSTGRES_DB')}"
 )
+yahoo_client_id = os.getenv("YAHOO_CONSUMER_KEY")
+yahoo_client_secret = os.getenv("YAHOO_CONSUMER_SECRET")
+yahoo_redirect_uri = os.getenv("YAHOO_REDIRECT_URI")
 
 CLEANUP_DATA = False

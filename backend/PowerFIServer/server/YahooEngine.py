@@ -6,6 +6,7 @@ from sqlalchemy import update, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from yfpy import YahooFantasySportsQuery, League, Transaction
 
+from PowerFIServer.server.config import yahoo_client_id, yahoo_client_secret, yahoo_redirect_uri
 from PowerFIServer.server.db.Dao.fantasy_team_dao import save_fantasy_teams
 from PowerFIServer.server.db.Dao.players_dao import save_players
 from PowerFIServer.server.db.Dao.transactions_dao import save_transactions
