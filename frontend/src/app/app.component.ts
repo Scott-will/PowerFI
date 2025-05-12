@@ -13,13 +13,4 @@ import { CommonModule } from '@angular/common';
 export class AppComponent {
   title = 'PowerFI';
 
-  constructor(private readonly configService: ConfigService) {}
-  
-  ngOnInit(): void {
-    // Load the config
-    this.configService.loadConfig().subscribe(config => {
-      this.configService.setApiUrl(config.apiUrl);
-      console.log('API URL:', this.configService.getApiUrl());  // You can now use the API URL dynamically
-    });
-  }
 }

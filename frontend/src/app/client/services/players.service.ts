@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ConfigService } from '../../config.services';
 import { PlayerTransactionStatsResponse } from '../models/player-transaction-stats';
+import { environment } from '../../environment/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +12,7 @@ import { PlayerTransactionStatsResponse } from '../models/player-transaction-sta
 export class PlayerService {
    
     constructor(private readonly http: HttpClient, private readonly configService: ConfigService){}
-
+    private readonly baseUrl = environment.apiUrl;
     private readonly getPlayerUrl = "/api/players/get_players?"
     private readonly getPlayerStatsUrl = "/api/players/get_player_transaction_stats?"
 
@@ -23,7 +24,7 @@ export class PlayerService {
             }
         }
 
-        return this.http.get<PlayerResponse>(this.configService.getApiUrl() + this.getPlayerUrl, { params });      
+        return this.http.get<PlayerResponse>(this.baseUrl + this.getPlayerUrl, { params });      
     }
 
     getAllPlayerStats(queryParams : {[key : string]:string}): Observable<PlayerTransactionStatsResponse> {
@@ -34,6 +35,6 @@ export class PlayerService {
             }
         }
 
-        return this.http.get<PlayerTransactionStatsResponse>(this.configService.getApiUrl() + this.getPlayerStatsUrl, { params }); 
+        return this.http.get<PlayerTransactionStatsResponse>(this.baseUrl + this.getPlayerStatsUrl, { params }); 
     }
 }

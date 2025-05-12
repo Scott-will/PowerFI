@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Transaction, TransactionResponse, TreeNode } from '../models/transaction';
 import { ConfigService } from '../../config.services';
+import { environment } from '../../environment/environment';
 
 
 @Injectable({
@@ -16,7 +17,8 @@ export class TransactionService {
     private readonly getTradesUrl = "/api/transactions/get_trades?"
     private readonly getTransactionTreeUrl = "/api/transactions/related_transactions"
     private readonly getPlayerTransactionsUrl = "/api/transactions/player_transactions?"
-
+    private readonly baseUrl = environment.apiUrl;
+    
     getAllTransactions(queryParams : {[key : string]:string}): Observable<TransactionResponse> {
         let params = new HttpParams();
         for (const key in queryParams) {
@@ -25,7 +27,7 @@ export class TransactionService {
             }
         }
 
-        return this.http.get<TransactionResponse>(this.configService.getApiUrl() + this.getTransactionUrl, { params });      
+        return this.http.get<TransactionResponse>(this.baseUrl + this.getTransactionUrl, { params });      
     }
 
     getAllTrades(queryParams : {[key : string]:string}): Observable<TransactionResponse> {
@@ -36,18 +38,18 @@ export class TransactionService {
             }
         }
 
-        return this.http.get<TransactionResponse>(this.configService.getApiUrl() + this.getTradesUrl, { params });      
+        return this.http.get<TransactionResponse>(this.baseUrl + this.getTradesUrl, { params });      
     }
 
     getTransactionTree(transactionId : string): Observable<TreeNode>{
         let params = new HttpParams();
         params = params.set("transaction_id", transactionId)
-        return this.http.get<TreeNode>(this.configService.getApiUrl() + this.getTransactionTreeUrl, {params})
+        return this.http.get<TreeNode>(this.baseUrl + this.getTransactionTreeUrl, {params})
     }
 
     getPlayerTransactions(playerId : string): Observable<Transaction[]>{
         let params = new HttpParams();
         params = params.set("player_id", playerId)
-        return this.http.get<Transaction[]>(this.configService.getApiUrl() + this.getPlayerTransactionsUrl, {params})
+        return this.http.get<Transaction[]>(this.baseUrl + this.getPlayerTransactionsUrl, {params})
     }
 }
